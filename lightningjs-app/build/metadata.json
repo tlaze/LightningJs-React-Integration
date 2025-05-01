@@ -1,0 +1,6 @@
+{
+  "name": "lightningjs-app",
+  "identifier": "lightningjs-app",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}
