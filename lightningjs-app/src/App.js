@@ -24,32 +24,40 @@ export default class App extends Lightning.Component {
         }
     }
 
-     _init() {
+    _init() {
         if (typeof window !== 'undefined') {
-            this.iframe = document.createElement('iframe')
-            this.iframe.src = 'http://localhost:3000' // Make sure React is on this port
-            this.iframe.style.position = 'absolute'
-            this.iframe.style.top = '0px'
-            this.iframe.style.left = '0px'
-            this.iframe.style.width = '25%'
-            this.iframe.style.height = '25%'
-            this.iframe.style.zIndex = '1000'
-            this.iframe.style.border = '2px, solid, black'
-            document.body.appendChild(this.iframe)
+            this.iframe = document.createElement('iframe');
+            this.iframe.src = 'http://localhost:3000';
+    
+            const size = 400;
+    
+            this.iframe.style.position = 'absolute';
+            this.iframe.style.left = `${1920 - size - 40}px`;
+            this.iframe.style.top = `${1080 - size - 40}px`;
+    
+            this.iframe.style.width = `${size}px`;
+            this.iframe.style.height = `${size}px`;
+            this.iframe.style.borderRadius = '50%';
+            this.iframe.style.border = '2px solid black';
+            this.iframe.style.overflow = 'hidden';
+            this.iframe.style.zIndex = '1000';
+    
+            document.body.appendChild(this.iframe);
         }
     }
 
-    _handleUp() {
-        console.log('Up key pressed')
+    _handleUpRelease(e) {
+        console.log('Up key pressed in lightning app')
+        this.iframe?.contentWindow?.postMessage('Connect', '*') 
     }
 
-    _handleDown() {
-        console.log('Down key pressed')
+    _handleDownRelease(e) {
+        console.log('Down key pressed in lightning app')
+        this.iframe?.contentWindow?.postMessage('Disconnect', '*') 
     }
 
     _handleEnterRelease(e) {
         console.log(e)
-        console.log('Enter key pressed in Lightning app')
-        this.iframe?.contentWindow?.postMessage('pressButton', '*')   
+        console.log('Enter key pressed in Lightning app') 
     }
 }

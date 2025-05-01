@@ -3,7 +3,7 @@
  * SDK version: 5.5.5
  * CLI version: 2.14.2
  * 
- * Generated: Thu, 01 May 2025 16:19:38 GMT
+ * Generated: Thu, 01 May 2025 17:45:28 GMT
  */
 
 var APP_lightningjs_app = (function () {
@@ -6722,28 +6722,33 @@ var APP_lightningjs_app = (function () {
     _init() {
       if (typeof window !== 'undefined') {
         this.iframe = document.createElement('iframe');
-        this.iframe.src = 'http://localhost:3000'; // Make sure React is on this port
+        this.iframe.src = 'http://localhost:3000';
+        const size = 400;
         this.iframe.style.position = 'absolute';
-        this.iframe.style.top = '0px';
-        this.iframe.style.left = '0px';
-        this.iframe.style.width = '25%';
-        this.iframe.style.height = '25%';
+        this.iframe.style.left = "".concat(1920 - size - 40, "px");
+        this.iframe.style.top = "".concat(1080 - size - 40, "px");
+        this.iframe.style.width = "".concat(size, "px");
+        this.iframe.style.height = "".concat(size, "px");
+        this.iframe.style.borderRadius = '50%';
+        this.iframe.style.border = '2px solid black';
+        this.iframe.style.overflow = 'hidden';
         this.iframe.style.zIndex = '1000';
-        this.iframe.style.border = '2px, solid, black';
         document.body.appendChild(this.iframe);
       }
     }
-    _handleUp() {
-      console.log('Up key pressed');
+    _handleUpRelease(e) {
+      var _this$iframe;
+      console.log('Up key pressed in lightning app');
+      (_this$iframe = this.iframe) === null || _this$iframe === void 0 || (_this$iframe = _this$iframe.contentWindow) === null || _this$iframe === void 0 || _this$iframe.postMessage('Connect', '*');
     }
-    _handleDown() {
-      console.log('Down key pressed');
+    _handleDownRelease(e) {
+      var _this$iframe2;
+      console.log('Down key pressed in lightning app');
+      (_this$iframe2 = this.iframe) === null || _this$iframe2 === void 0 || (_this$iframe2 = _this$iframe2.contentWindow) === null || _this$iframe2 === void 0 || _this$iframe2.postMessage('Disconnect', '*');
     }
     _handleEnterRelease(e) {
-      var _this$iframe;
       console.log(e);
       console.log('Enter key pressed in Lightning app');
-      (_this$iframe = this.iframe) === null || _this$iframe === void 0 || (_this$iframe = _this$iframe.contentWindow) === null || _this$iframe === void 0 || _this$iframe.postMessage('pressButton', '*');
     }
   }
 
